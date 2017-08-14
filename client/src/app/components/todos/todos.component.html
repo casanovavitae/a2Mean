@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <legend>Add Todos</legend>
+  </div>
+
+<div class="row">
+  <div class="form-group">
+    <div class="col-md-4">
+      <input type="text" placeholder="Add Todo Text" class="form-control input-md" required="" autofocus #todoText>
+    </div>
+  </div>
+
+  <!-- Button -->
+  <div class="form-group">
+    <div class="col-md-4">
+      <button (click)="addTodo($event,todoText)" class="btn btn-default">Create</button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <legend>List Todos</legend>
+</div>
+
+
+	<div class="row">
+		<div class="span5">
+            <table class="table table-striped table-condensed">
+                  <thead>
+                  <tr>
+                      <th>Text</th>
+                      <th>Completed</th>
+                      <th>Edit</th>
+                      <th>Delete</th>                                          
+                  </tr>
+              </thead>   
+              <tbody *ngFor="let todo of todos" >
+                <tr>
+                    <td><input type="checkbox" [checked]="todo.isCompleted" (click)="updateStatus(todo)"></td>
+                    <td>
+                      <span [class.hidden]="todo.isEditMode">{{todo.text}}</span>
+                      <input type="text" [class.hidden]="!todo.isEditMode" [value]="todo.text" (keyup.enter)="updateTodoText($event, todo)">
+                      <input type="button"
+                      class="btn btn-warning" 
+                      [class.hidden]="!todo.isEditMode" 
+                      value="Cancel"
+                      (click)="setEditState(todo,false)"
+                      />
+                    </td>
+                    <td>
+                      <input type="button"
+                      class="btn btn-default"
+                      [class.diable]="todo.isCompleted" 
+                      value="Edit"
+                      (click)="setEditState(todo,true)"
+                      />
+                    </td>
+                    <td>
+                      <input type="button"
+                      class="btn btn-danger"
+                      value="Delete"
+                      (click)="deleteTodo(todo)"
+                      />
+                    </td>
+                    <td *ngIf="todo.isCompleted"><span class="label label-success">Active</span></td> 
+                    <td *ngIf="!todo.isCompleted"><span class="label label-warning">Pending</span></td>   
+                </tr>                            
+              </tbody>
+            </table>
+            </div>
+	</div>
+</div>
+
+
+
