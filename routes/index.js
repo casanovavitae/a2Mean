@@ -10,7 +10,8 @@ router.get('/login',function(req,res,next){
 })*/
 
 router.get('*', function(req, res) {
-  res.sendfile('./client/dist/index.html')
+    console.log("dirname",process.env.PWD)
+  res.sendFile(process.env.PWD +'/client/dist/index.html')
 })
 
 module.exports = router;

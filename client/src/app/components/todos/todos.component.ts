@@ -46,7 +46,6 @@ export class TodosComponent implements OnInit {
 
   updateStatus(todo){
     var result:any;
-    console.log()
     var _todo = {
       _id : todo._id,
       text: todo.text,

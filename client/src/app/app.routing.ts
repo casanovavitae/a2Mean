@@ -8,7 +8,8 @@ import{AboutComponent}from'./components/about/about.component';
 const appRoutes: Routes = [
     {
         path:'',
-        component:TodosComponent
+        component:TodosComponent,
+        pathMatch: 'full'
     },
     {
         path:'search',

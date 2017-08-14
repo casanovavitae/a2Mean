@@ -21,10 +21,11 @@ router.get('/auth',function(req,res,next){
         .then(function(data) {
             console.log('The access token is ' + data.body['access_token']);
             spotifyApi.setAccessToken(data.body['access_token']);
-            res.redirect('/');
+            res.send(data.body['access_token']);
+            //res.redirect('/');
         }, function(err) {
             console.log('Something went wrong!', err);
-            res.redirect('/login');
+            res.send(err);
         });
 })
 
@@ -38,13 +39,19 @@ router.get('/albums',function(req,res,next){
         });
 })
 
-router.get('/artists',function(req,res,next){
-    spotifyApi.searchArtists('Love')
+router.get('/artists/:artist',function(req,res,next){
+    console.log('req.params.artist',req.params.artist);
+    var artist = req.params.artist;
+    spotifyApi.searchArtists(artist)
         .then(function(data) {
             console.log('Search artists by "Love"', data.body);
+            res.send(data.body);
         }, function(err) {
             console.error(err);
+            res.send(err);
         });
 })
+
+
 
 module.exports = router;

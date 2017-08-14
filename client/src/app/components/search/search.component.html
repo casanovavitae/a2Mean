@@ -3,6 +3,36 @@
 </p>
 <form>
   <div>
-    <input class="form-control" type="text" placeholder="Search Artist" [(ngModel)]="searchStr" (keyup)="searchMusic()" />
+    <input class="form-control" type="text" placeholder="Search Artist" [(ngModel)]="searchStr" name="search" (keyup)="searchMusic()" />
   </div>
 </form>
+
+<div class="promotion-section">
+    <div class="w-container promotion-container">
+      <h1 class="section-title">featured</h1>
+      <div class="title-underline"></div>
+        
+      <div class="promo-flex">
+
+        <div *ngFor="let artist of artists" >
+            
+          <div data-ix="blog-card" class="w-clearfix w-preserve-3d promo-card">
+            <img width="100%" height="260" [src]=" (artist.image) && (artist.images.length > 0) ? artist.images[0].url : 'not' " />
+            <div class="blog-bar color-pink"></div>
+            <div class="blog-post-text">
+              {{artist.name}}
+
+              <div class="blog-description pink-text">
+                {{artist.popularity}}
+              </div>
+
+            </div>
+          </div>
+
+      </div>
+
+    </div>
+
+</div>
+
+      
